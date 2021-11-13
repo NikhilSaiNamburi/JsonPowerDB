@@ -20,5 +20,9 @@ JsonPowerDB (JPDB) is Next Generation, Creative and Disruptive Multi-mode DBMS.
 
 [**JPDB Documentation link**](https://login2explore.com/jpdb/docs.html)
 
+## Screenshots
+
+![JPDB compared to other DBMS](https://i.ibb.co/T8TGR5N/20211113-103920.jpg)
+
 
   
