@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insert into JPDB</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="http://login2explore.com/jpdb/resources/js/0.0.3/jpdb-commons.js"></script>
+    <style>
+        .main{
+            margin: 0cm 10cm;
+            /* border: solid 2px lightslategray; 
+            border-radius: 10px;                        */
+        }
+        .division{
+            padding: 8px 2px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 1.3em;
+        }
+        .inp{
+            box-sizing: content-box;
+            width: auto;
+            size: 40;
+            height: 30px;
+        }
+        #Submit{
+            cursor: pointer;
+            height: 30px;
+        }
+        #Submit:hover{
+            color:olive
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center;">Student Registration Form</h1>
+    <div class="main">
+        <form>
+            <div class="division">
+                <label for="name">Student Name:</label><br>
+                <input type="text" placeholder="Enter your name" class="inp" id="name" required><br>
+            </div>
+            <div class="division">
+                <label for="contact">Mobile Number:</label><br>
+                <input type="text" class="inp" id="MobileNo"placeholder="Enter your mobile number" required><br>
+            </div>
+            <div class="division">
+                <label for="Email">Email:</label><br>
+                <input type="text" class="inp" id="Email"placeholder="Enter your Email" required><br>
+            </div>
+            <input type="button" name="Submit" id="Submit" value="Submit" onclick="saveStudent()">
+        </form>
+    </div>
+    <script>
+        function validateAndGetFormData() {
+            var name = $("#name").val();
+            if (name === "") {
+            alert("Student Name Required Value");
+            $("#name").focus();
+            return "";
+            }
+            var Mobile = $("#MobileNo").val();
+            if (Mobile === "") {
+            alert("Mobile Number is Required Value");
+            $("#MobileNo").focus();
+            return "";
+            }
+            var Email = $("#Email").val();
+            if (Email === "") {
+            alert("Student Email is Required Value");
+            $("#Email").focus();
+            return "";
+            }
+            var jsonStrObj = {
+            Name: name,
+            MobileNo: Mobile,
+            Student_Email: Email,
+            };
+            return JSON.stringify(jsonStrObj);
+        }
+        function resetForm() {
+            $("#name").val("");
+            $("#MobileNo").val("");
+            $("#Email").val("");
+            $("#name").focus();
+        }
+        function saveStudent() {
+            var jsonStr = validateAndGetFormData();
+            if (jsonStr === "") {
+                return;
+            }
+        var putReqStr = createPUTRequest("90938601|-31948825990359685|90944275",
+        jsonStr, "Details", "Student");
+        alert(putReqStr);
+        jQuery.ajaxSetup({async: false});
+        var resultObj = executeCommandAtGivenBaseUrl(putReqStr,"http://api.login2explore.com:5577", "/api/iml");
+        jQuery.ajaxSetup({async: true});
+        alert(JSON.stringify(resultObj));
+        resetForm();
+}
+    </script>
+</body>
+</html>

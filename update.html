@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update in JPDB</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="http://login2explore.com/jpdb/resources/js/0.0.3/jpdb-commons.js"></script>
+    <style>
+        .main{
+            margin: 0cm 10cm;
+            /* border: solid 2px lightslategray; 
+            border-radius: 10px;                        */
+        }
+        .division{
+            padding: 8px 2px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 1.3em;
+        }
+        .inp{
+            box-sizing: content-box;
+            width: auto;
+            size: 40;
+            height: 30px;
+        }
+        #Submit{
+            cursor: pointer;
+            height: 30px;
+        }
+        #Submit:hover{
+            color:olive
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center;">Student Updation Form</h1>
+    <div class="main">
+        <form>
+            <div class="division">
+                <label for="roll">Roll No:</label><br>
+                <input type="text" placeholder="Enter roll number" name="Roll" class="inp" id="roll" required>
+            </div>
+            <div class="division">
+                <label for="name">Branch Name:</label><br>
+                <input type="text" placeholder="Enter your bracnch name" class="inp" id="name"><br>
+            </div>
+            <input type="button" name="Submit" id="Submit" value="Submit" onclick="updateStudent()">
+        </form>
+    </div>
+    <script>
+        function validateAndGetFormData() {
+            var rollno = $("#roll").val();
+            if (rollno === "") {
+            alert("Roll Number is Required Value");
+            $("#roll").focus();
+            return "";
+            }
+            var name = $("#name").val();
+            if(name===""){
+                alert("Branch is required value");
+                $("#name").focus();
+                return "";
+            }
+            var jsonStr= {
+                Branch: name
+            }
+            return JSON.stringify(jsonStr);
+        }
+        /*function createUPDATERecordRequest(token, jsonObj, dbName, relName, reqId) {
+            var req = "{\n"
+            + "\"token\" : \""
+            + token
+            + "\","
+            + "\"dbName\": \""
+            + dbName
+            + "\",\n" + "\"cmd\" : \"UPDATE\",\n"
+            + "\"rel\" : \""
+            + relName
+            + "\",\n"
+            + "\"jsonStr\":{ \""
+            + reqId
+            + "\":\n"
+            + jsonObj
+            + "\n"
+            + "}}";
+    return req;
+}*/
+        function resetform() {
+            $("#roll").val("");
+            $("#name").val("");
+            $("#roll").focus();
+        }
+        function updateStudent() {
+            var jsonStrObj=validateAndGetFormData();
+            if (jsonStrObj === "") {
+                return;
+            }
+            var roll=$("#roll").val();
+            var reqStrObj=createUPDATERecordRequest("90938601|-31948825990359685|90944275",jsonStrObj,"Details","Student",roll);
+            alert(reqStrObj);
+            jQuery.ajaxSetup({async: false});
+            var resStrObj=executeCommandAtGivenBaseUrl(reqStrObj,"http://api.login2explore.com:5577","/api/iml");
+            jQuery.ajaxSetup({async:true});
+            alert(resStrObj);
+            resetform();
+        }
+    </script>
+</body>
+</html>
