@@ -1,6 +1,6 @@
 # JsonPowerDB
 
-## This project is all about the introduction to JsonPowerDB(JPDB) and how to use JPDB for CRUD operations.
+## This project is all about the Introduction to JsonPowerDB(JPDB) and how to use JPDB for CRUD operations.
 
 ## About JsonPowerDB
   - _JsonPowerDB is a Database Server with Developer friendly REST API services. It's a High Performance, Light Weight, Ajax Enabled, Serverless, Simple to Use, Real-time Database._
@@ -23,6 +23,9 @@ JsonPowerDB (JPDB) is Next Generation, Creative and Disruptive Multi-mode DBMS.
 ## Screenshots
 
 ![JPDB compared to other DBMS](/Assets/20211113_103920.jpg)
+
+#### JPDB Dashboard preview
+![JPDB Dashboard](/Assets/1.png)
 
 
   
